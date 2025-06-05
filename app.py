@@ -29,6 +29,7 @@ transform = transforms.Compose([
                          [0.229, 0.224, 0.225])
 ])
 
+
 # Extract feature from image
 def extract_feature(image):
     image = image.convert("RGB")
@@ -39,7 +40,7 @@ def extract_feature(image):
 
 # Load reference image features
 @st.cache_data
-def load_reference_features(train_folder="Training"):
+def load_reference_features(train_folder="Fabric_matcher\Training"):
     features = {}
     for filename in os.listdir(train_folder):
         if filename.lower().endswith(('.jpg', '.png')):
@@ -50,7 +51,7 @@ def load_reference_features(train_folder="Training"):
     return features
 
 # Matcher
-def match_image(test_image, reference_features, train_folder="Training"):
+def match_image(test_image, reference_features, train_folder="Fabric_matcher\Training"):
     test_feat = extract_feature(test_image)
     best_match, max_sim = None, -1
 
@@ -71,7 +72,7 @@ st.write("Upload a fabric image or click one with your camera to find the matchi
 uploaded_file = st.file_uploader("Upload or take a fabric image:", type=["jpg", "png"], accept_multiple_files=False, label_visibility="visible")
 
 # Load reference features once
-reference_features = load_reference_features("Training")
+reference_features = load_reference_features("Fabric_matcher\Training")
 
 if uploaded_file:
     image = Image.open(uploaded_file)
