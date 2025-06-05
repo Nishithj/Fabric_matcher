@@ -39,7 +39,7 @@ def extract_feature(image):
 
 # Load reference image features
 @st.cache_data
-def load_reference_features(train_folder="training"):
+def load_reference_features(train_folder="Training"):
     features = {}
     for filename in os.listdir(train_folder):
         if filename.lower().endswith(('.jpg', '.png')):
@@ -50,7 +50,7 @@ def load_reference_features(train_folder="training"):
     return features
 
 # Matcher
-def match_image(test_image, reference_features, train_folder="training"):
+def match_image(test_image, reference_features, train_folder="Training"):
     test_feat = extract_feature(test_image)
     best_match, max_sim = None, -1
 
@@ -71,7 +71,7 @@ st.write("Upload a fabric image or click one with your camera to find the matchi
 uploaded_file = st.file_uploader("Upload or take a fabric image:", type=["jpg", "png"], accept_multiple_files=False, label_visibility="visible")
 
 # Load reference features once
-reference_features = load_reference_features("training")
+reference_features = load_reference_features("Training")
 
 if uploaded_file:
     image = Image.open(uploaded_file)
